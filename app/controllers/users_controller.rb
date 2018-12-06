@@ -3,24 +3,19 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(email: login_params[:email])
+    user.authenticate(login_params[:password])
+    render json: user.id
 
-    if user
-      render json: user.id
-    else
+    rescue StandardError
       render json: {
         status: 500,
         message: 'Username or Password not found.'
       }
-    end
   end
 
   private
 
   def login_params
     params.permit(:email, :password)
-  end
-
-  def hash_password(password)
-    BCrypt::Password.create(password).to_s
   end
 end

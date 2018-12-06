@@ -1,6 +1,6 @@
 # Base seeds file for example data
 
-user = User.create(email: 'johndoe@sample.com', password: 'notpassword', firstname: 'John', lastname: 'Doe')
+user = User.create(email: 'test@test.com', password: 'test', firstname: 'John', lastname: 'Doe')
 
 main_lifts = {
   'Squat' => 'BS',
