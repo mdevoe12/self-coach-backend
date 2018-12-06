@@ -2,15 +2,15 @@ class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:login]
 
   def login
-    user = User.find_by(email: login_params[:email])
-    user.authenticate(login_params[:password])
-    render json: user.id
-
-    rescue StandardError
+    result = User.login(login_params)
+    if result
       render json: {
-        status: 500,
-        message: 'Username or Password not found.'
+        status: 200,
+        message: 'User successfully logged in.'
       }
+    else
+      render 500
+    end
   end
 
   private
